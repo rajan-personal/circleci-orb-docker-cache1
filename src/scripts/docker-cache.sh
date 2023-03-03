@@ -14,7 +14,7 @@ for ref in $FINAL_BASE_IMAGE_NAMES; do
     fi
     # If there is no slash in the repo name, it is an official image,
     # we will need to prepend library/ to it
-    if ! grep -q '/' \<<< "$REPOSITORY"; then
+    if ! grep -q '/' \\<<< "$REPOSITORY"; then
     REPOSITORY="library/$REPOSITORY"
     fi
     acceptM="application/vnd.docker.distribution.manifest.v2+json"
