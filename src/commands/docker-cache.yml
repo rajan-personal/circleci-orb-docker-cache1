@@ -1,0 +1,11 @@
+# parameters:
+#   to:
+#     type: string
+#     default: "World"
+#     description: "Hello to whom?"
+steps:
+  - run:
+      # environment:
+      #   PARAM_TO: <<parameters.to>>
+      name: Generate docker cache key
+      command: <<include(scripts/docker-cache.sh)>>
