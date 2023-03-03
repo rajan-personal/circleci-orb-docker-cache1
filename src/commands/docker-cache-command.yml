@@ -2,5 +2,10 @@ description: >
   This command echos "Hello World" using file inclusion 1
 steps:
   - run:
+      name: install skopeo
+      command: |
+        sudo apt-get update
+        sudo apt-get install -y skopeo
+  - run:
       name: docker cache key
       command: <<include(scripts/docker-cache.sh)>>
