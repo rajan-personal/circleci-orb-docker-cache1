@@ -1,3 +1,4 @@
+#!/bin/bash
 DOCKERFILE=docker/Dockerfile
 VERSION=$(cat .python-version)
 BASE_IMAGE_NAMES=$(grep "^FROM" $DOCKERFILE | cut -d' ' -f2 | uniq)
