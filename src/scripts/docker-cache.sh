@@ -11,6 +11,19 @@ for ref in $FINAL_BASE_IMAGE_NAMES; do
     REPOSITORY=$ref
     TAG="latest"
   fi
+  if ! grep -q '/' \\<<< "$REPOSITORY"; then
+    REPOSITORY="library/$REPOSITORY"
+  fi
+  acceptM="application/vnd.docker.distribution.manifest.v2+json"
+  acceptML="application/vnd.docker.distribution.manifest.list.v2+json"
+  token=$(curl -s "https://auth.docker.io/token?service=registry.docker.io&scope=repository:${REPOSITORY}:pull" \
+        | jq -r '.token')
+  IMAGE_DIGEST=$(curl -H "Accept: ${acceptM}" \
+    -H "Accept: ${acceptML}" \
+    -H "Authorization: Bearer $token" \
+    -I -s "https://registry-1.docker.io/v2/${REPOSITORY}/manifests/${TAG}" | \
+    grep -i ^etag: | cut -d: -f2-)
+  echo $IMAGE_DIGEST >> docker-layer-caching-key.txt
 done
 cp $DOCKERFILE docker-layer-caching-key.txt
 echo "$BUILD_EXCLUDE_ENVS" >> docker-layer-caching-key.txt
