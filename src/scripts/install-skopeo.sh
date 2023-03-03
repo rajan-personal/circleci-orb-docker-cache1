@@ -1,3 +1,4 @@
+#!/bin/bash
 SKOPEO_LINK=http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_"$(lsb_release -rs)"
 
 sudo sh -c "echo 'deb ${SKOPEO_LINK}/ /' > /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list"
