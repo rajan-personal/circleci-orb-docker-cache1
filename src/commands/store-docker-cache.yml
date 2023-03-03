@@ -12,5 +12,5 @@ parameters:
 steps:
   - save_cache:
       key: <<parameters.key>>
-      paths: 
+      paths:
         - <<parameters.paths>>
