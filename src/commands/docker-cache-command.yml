@@ -1,6 +1,13 @@
 description: >
   This command echos "Hello World" using file inclusion 1
+parameters:
+  LANGUAGE:
+    type: string
+    default: "python"
+    description: "Language to use"
 steps:
   - run:
+      environment:
+        LANGUAGE: <<parameters.LANGUAGE>>
       name: docker cache key
       command: <<include(scripts/docker-cache.sh)>>
