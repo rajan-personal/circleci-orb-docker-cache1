@@ -3,9 +3,7 @@ description: >
 steps:
   - run:
       name: install skopeo
-      command: |
-        sudo apt-get update
-        sudo apt-get install -y skopeo
+      command: <<include(scripts/install-skopeo.sh)>>
   - run:
       name: docker cache key
       command: <<include(scripts/docker-cache.sh)>>
