@@ -7,7 +7,7 @@ parameters:
     description: "Cache key"
   paths:
     type: steps
-    default: 
+    default:
       - /tmp/docker-layer-caching-key.txt
     description: "Cache paths"
 steps:
