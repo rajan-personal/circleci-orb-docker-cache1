@@ -7,15 +7,17 @@ parameters:
     type: string
     default: "docker/Dockerfile"
     description: "Dockerfile path"
-  VERSION:
-    type: string
-    description: "language version"
+  # VERSION:
+  #   type: string
+  #   description: "language version"
 steps:
+  - run:
+      name: set version
+      command: |
+        echo "export VERSION=$(cat .python-version)"
   - run:
       environment:
         DOCKERFILE: <<parameters.DOCKERFILE>>
-        VERSION: <<parameters.VERSION>>
+        # VERSION: <<parameters.VERSION>>
       name: Generate docker cache key
-      command: |
-        export VERSION=$(cat .python-version)
-        <<include(scripts/docker-cache.sh)>>
+      command: <<include(scripts/docker-cache.sh)>>
