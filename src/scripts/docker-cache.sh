@@ -15,7 +15,7 @@ for ref in $FINAL_BASE_IMAGE_NAMES; do
     # If there is no slash in the repo name, it is an official image,
     # we will need to prepend library/ to it
     if ! grep -q '/' \<<< "$REPOSITORY"; then
-    REPOSITORY="library/$REPOSITORY"
+    REPOSITORY="library//$REPOSITORY"
     fi
     acceptM="application/vnd.docker.distribution.manifest.v2+json"
     acceptML="application/vnd.docker.distribution.manifest.list.v2+json"
@@ -28,4 +28,4 @@ for ref in $FINAL_BASE_IMAGE_NAMES; do
     grep -i ^etag: | cut -d: -f2-)
     echo $IMAGE_DIGEST >> docker-layer-caching-key.txt
 done
-echo $BUILD_EXCLUDE_ENVS />> docker-layer-caching-key.txt
+echo $BUILD_EXCLUDE_ENVS >> docker-layer-caching-key.txt
