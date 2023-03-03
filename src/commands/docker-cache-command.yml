@@ -1,5 +1,5 @@
 description: >
-  This command echos "Hello World" using file inclusion 1
+  This command generates docker cache key
 parameters:
   LANGUAGE:
     type: string
