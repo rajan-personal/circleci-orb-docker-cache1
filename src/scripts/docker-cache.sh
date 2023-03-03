@@ -23,7 +23,7 @@ for ref in $FINAL_BASE_IMAGE_NAMES; do
     -H "Authorization: Bearer $token" \
     -I -s "https://registry-1.docker.io/v2/${REPOSITORY}/manifests/${TAG}" | \
     grep -i ^etag: | cut -d: -f2-)
-  echo "$IMAGE_DIGEST" \>> docker-layer-caching-key.txt
+  echo "$IMAGE_DIGEST" ">>" docker-layer-caching-key.txt
 done
 cp $DOCKERFILE docker-layer-caching-key.txt
-echo "$BUILD_EXCLUDE_ENVS" \>> docker-layer-caching-key.txt
+echo "$BUILD_EXCLUDE_ENVS" ">>" docker-layer-caching-key.txt
