@@ -6,11 +6,11 @@ parameters:
     default: docker-layer-caching-key-{{ checksum "/tmp/docker-layer-caching-key.txt" }}
     description: "Cache key"
   paths:
-    type: steps
-    default:
-      - /tmp/docker-layer-caching-key.txt
+    type: string
+    default: /tmp/docker-layer-caching-key.txt
     description: "Cache paths"
 steps:
   - save_cache:
       key: <<parameters.key>>
-      paths: <<parameters.paths>>
+      paths: 
+        - <<parameters.paths>>
