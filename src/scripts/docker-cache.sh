@@ -13,8 +13,8 @@
 # echo $BUILD_EXCLUDE_ENVS >> docker-layer-caching-key.txt
 
 
-DOCKERFILE="${DOCKERFILE}"
-VERSION="${VERSION}"
+# DOCKERFILE="${DOCKERFILE}"
+# VERSION="${VERSION}"
 BASE_IMAGE_NAMES=$(grep "^FROM" $DOCKERFILE | cut -d' ' -f2 | uniq)
 FINAL_BASE_IMAGE_NAMES=$(eval echo "$BASE_IMAGE_NAMES")
 
