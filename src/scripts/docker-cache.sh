@@ -3,19 +3,19 @@ VERSION=$(cat .python-version)
 BASE_IMAGE_NAMES=$(grep "^FROM" $DOCKERFILE | cut -d' ' -f2 | uniq)
 FINAL_BASE_IMAGE_NAMES=$(eval echo "$BASE_IMAGE_NAMES")
 cp $DOCKERFILE docker-layer-caching-key.txt
-for ref in $FINAL_BASE_IMAGE_NAMES; do
-if grep -q ':' \<<< "$ref"; then
-    REPOSITORY=$(cut -d':' -f1 \<<< "$ref")
-    TAG=$(cut -d':' -f2 \<<< "$ref")
-else
-    REPOSITORY=$ref
-    TAG="latest"
-fi
+# for ref in $FINAL_BASE_IMAGE_NAMES; do
+# if grep -q ':' \<<< "$ref"; then;
+#     REPOSITORY=$(cut -d':' -f1 \<<< "$ref")
+#     TAG=$(cut -d':' -f2 \<<< "$ref")
+# else;
+REPOSITORY=$ref
+TAG="latest"
+# fi
 # If there is no slash in the repo name, it is an official image,
 # we will need to prepend library/ to it
-if ! grep -q '/' \<<< "$REPOSITORY"; then
-    REPOSITORY="library/$REPOSITORY"
-fi
+# if ! grep -q '/' \<<< "$REPOSITORY"; then
+#     REPOSITORY="library/$REPOSITORY"
+# fi
 acceptM="application/vnd.docker.distribution.manifest.v2+json"
 acceptML="application/vnd.docker.distribution.manifest.list.v2+json"
 token=$(curl -s "https://auth.docker.io/token?service=registry.docker.io&scope=repository:${REPOSITORY}:pull" \
