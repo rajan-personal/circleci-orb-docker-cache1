@@ -1,6 +1,6 @@
 #!/bin/bash
 DOCKERFILE=docker/Dockerfile
-VERSION=$(cat .ruby-version)
+VERSION=$(cat .ruby-version || True)
 BASE_IMAGE_NAMES=$(grep "^FROM" $DOCKERFILE | cut -d' ' -f2 | uniq)
 FINAL_BASE_IMAGE_NAMES=$(eval echo "$BASE_IMAGE_NAMES")
 
