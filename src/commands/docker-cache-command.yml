@@ -2,7 +2,7 @@ description: >
   This command echos "Hello World" using file inclusion 1
 steps:
   - run:
-    name: "docker cache key"
+    name: docker cache key
     command: |
       DOCKERFILE=docker/Dockerfile
       VERSION=$(cat .python-version)
