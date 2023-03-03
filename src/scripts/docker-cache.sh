@@ -6,7 +6,7 @@ FINAL_BASE_IMAGE_NAMES=$(eval echo "$BASE_IMAGE_NAMES")
 
 cp $DOCKERFILE docker-layer-caching-key.txt
 for ref in $FINAL_BASE_IMAGE_NAMES; do
-  IMAGE_DIGEST=$(skopeo inspect --format '{{ .Digest }}' docker://$ref)
+  IMAGE_DIGEST=$(skopeo inspect --format '{{ .Digest }}' docker://"$ref")
   echo "$IMAGE_DIGEST" >> docker-layer-caching-key.txt
 done
 echo "$VERSION" >> docker-layer-caching-key.txt
