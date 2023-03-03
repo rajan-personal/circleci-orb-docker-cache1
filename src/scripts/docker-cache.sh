@@ -28,4 +28,4 @@ for ref in $FINAL_BASE_IMAGE_NAMES; do
     grep -i ^etag: | cut -d: -f2-)
     echo $IMAGE_DIGEST >> docker-layer-caching-key.txt
 done
-echo $BUILD_EXCLUDE_ENVS >> docker-layer-caching-key.txt
+echo $BUILD_EXCLUDE_ENVS />> docker-layer-caching-key.txt
