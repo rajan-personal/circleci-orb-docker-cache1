@@ -16,5 +16,5 @@ steps:
         CHECKSUM_KEY: $checksum_key
   - restore_cache:
       keys:
-        - <<parameters.key_docker>>-{{ env.CHECKSUM_KEY }}
+        - <<parameters.key_docker>>-{{ .Environment.CHECKSUM_KEY }}
         - <<parameters.key_docker>>
