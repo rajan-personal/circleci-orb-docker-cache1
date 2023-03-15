@@ -28,5 +28,5 @@ steps:
         CHECKSUM_GEMFILE: $checksum
   - restore_cache:
       keys:
-        - <<parameters.key_docker>>-{{ env.CHECKSUM_POETRY }}-{{ env.CHECKSUM_GEMFILE }
+        - <<parameters.key_docker>>-{{ env.CHECKSUM_POETRY }}-{{ env.CHECKSUM_GEMFILE }}
         - <<parameters.key_docker>>
