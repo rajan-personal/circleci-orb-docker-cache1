@@ -15,7 +15,7 @@ parameters:
     description: "Path to lock file"
 steps:
     - save_cache:
-        key: 
+        keys: 
           - <<parameters.key_docker>>
           - <<parameters.key_docker>>-{{ checksum "<<parameters.lock_file>>" }}
         paths:
