@@ -7,25 +7,8 @@ parameters:
     description: "Cache key to restore"
 steps:
   - run:
-      name: Calculate checksum of poetry.lock
-      command: |
-        if [ -f "poetry.lock" ]; then
-          checksum=$(md5sum poetry.lock | awk '{print $1}')
-        else
-          checksum="none"
-        fi
-      environment:
-        CHECKSUM_POETRY: $checksum
-  - run:
-      name: Calculate checksum of Gemfile.lock
-      command: |
-        if [ -f "Gemfile.lock" ]; then
-          checksum=$(md5sum Gemfile.lock | awk '{print $1}')
-        else
-          checksum="none"
-        fi
-      environment:
-        CHECKSUM_GEMFILE: $checksum
+      name: generate checksum for lock file
+      command: <<include(scripts/checksum-lock.sh)>>
   - restore_cache:
       keys:
         - <<parameters.key_docker>>-{{ env.CHECKSUM_POETRY }}-{{ env.CHECKSUM_GEMFILE }}

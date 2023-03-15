@@ -27,26 +27,6 @@ steps:
         DOCKERFILE: <<parameters.DOCKERFILE_PATH>>
       name: docker cache key
       command: <<include(scripts/docker-cache.sh)>>
-  - run:
-      name: Calculate checksum of poetry.lock
-      command: |
-        if [ -f "poetry.lock" ]; then
-          checksum=$(md5sum poetry.lock | awk '{print $1}')
-        else
-          checksum="none"
-        fi
-      environment:
-        CHECKSUM_POETRY: $checksum
-  - run:
-      name: Calculate checksum of Gemfile.lock
-      command: |
-        if [ -f "Gemfile.lock" ]; then
-          checksum=$(md5sum Gemfile.lock | awk '{print $1}')
-        else
-          checksum="none"
-        fi
-      environment:
-        CHECKSUM_GEMFILE: $checksum
   - save_cache:
       key: <<parameters.key_docker>>
       paths:
