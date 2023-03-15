@@ -1,14 +1,14 @@
 #!/bin/bash
 if [ -f "poetry.lock" ]; then
-    checksum=$(md5sum poetry.lock | awk '{print $1}')
+    checksum_python=$(md5sum poetry.lock | awk '{print $1}')
 else
-    checksum="none"
+    checksum_python="none"
 fi
-export CHECKSUM_POETRY=$checksum
 
 if [ -f "Gemfile.lock" ]; then
-    checksum=$(md5sum Gemfile.lock | awk '{print $1}')
+    checksum_ruby=$(md5sum Gemfile.lock | awk '{print $1}')
 else
-    checksum="none"
+    checksum_ruby="none"
 fi
-export CHECKSUM_GEMFILE=$checksum
+
+echo "$checksum_python-$checksum_ruby" > /tmp/checksum_key
