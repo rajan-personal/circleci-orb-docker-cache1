@@ -9,29 +9,9 @@ parameters:
     type: string
     default: /tmp/docker-layer-caching-key.txt
     description: "Cache paths"
-  LANGUAGE:
-    type: string
-    default: "python"
-    description: "Language to use"
-  DOCKERFILE_PATH:
-    type: string
-    default: "docker/Dockerfile"
-    description: "Path to Dockerfile"
 steps:
   - run:
-      name: install skopeo
-      command: <<include(scripts/install-skopeo.sh)>>
-  - run:
-      environment:
-        LANGUAGE: <<parameters.LANGUAGE>>
-        DOCKERFILE: <<parameters.DOCKERFILE_PATH>>
-      name: docker cache key
-      command: <<include(scripts/docker-cache.sh)>>
-  - run:
-      name: generate checksum for lock file
-      command: <<include(scripts/checksum-lock.sh)>>
-  - run:
-      name: generate checksum key
+      name: get checksum key
       command: checksum_key=$(cat /tmp/checksum_key)
       environment:
         CHECKSUM_KEY: $checksum_key
@@ -40,6 +20,6 @@ steps:
       paths:
         - <<parameters.paths>>
   - save_cache:
-      key: <<parameters.key_docker>>-{{ env.CHECKSUM_KEY }}
+      key: <<parameters.key_docker>>-{{ .Environment.CHECKSUM_KEY }}
       paths:
         - <<parameters.paths>>
