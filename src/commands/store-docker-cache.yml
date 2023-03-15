@@ -19,8 +19,8 @@ parameters:
     description: "Path to Dockerfile"
 steps:
   - run:
-    name: install skopeo
-    command: <<include(scripts/install-skopeo.sh)>>
+      name: install skopeo
+      command: <<include(scripts/install-skopeo.sh)>>
   - run:
       environment:
         LANGUAGE: <<parameters.LANGUAGE>>
