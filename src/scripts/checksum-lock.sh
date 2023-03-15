@@ -1,3 +1,4 @@
+#!/bin/bash
 if [ -f "poetry.lock" ]; then
     checksum=$(md5sum poetry.lock | awk '{print $1}')
 else
