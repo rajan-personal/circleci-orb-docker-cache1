@@ -24,6 +24,7 @@ workflows:
           vcs-type: << pipeline.project.type >>
           requires:
             [orb-tools/lint, orb-tools/review, orb-tools/pack, shellcheck/check]
+          tag: 1.0.1
           # Use a context to hold your publishing token.
           context: orb-publishing
           filters: *filters
