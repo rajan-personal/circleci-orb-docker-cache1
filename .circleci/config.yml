@@ -30,8 +30,6 @@ workflows:
           # Use a context to hold your publishing token.
           context: orb-publishing
           filters: *filters
-          environment:
-            CIRCLE_TAG : v1.0.1
       # Triggers the next workflow in the Orb Development Kit
       - orb-tools/continue:
           pipeline-number: << pipeline.number >>
