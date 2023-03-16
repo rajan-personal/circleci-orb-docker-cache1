@@ -11,5 +11,5 @@ steps:
   - run:
       environment:
         PARAM_TO: <<parameters.to>>
-      name: Hello Greeting
+      name: Hello Greeting 1
       command: <<include(scripts/greet.sh)>>
